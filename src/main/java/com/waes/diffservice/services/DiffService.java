@@ -66,7 +66,8 @@ public class DiffService {
     private String validateInput(String input) {
         try {
             String json = new String(decoder.decode(input));
-            return Json.createReader(new StringReader(json)).read().toString();
+            Json.createReader(new StringReader(json)).read().toString();
+            return json;
         } catch (IllegalArgumentException e) {
             throw new InvalidInputException(e, ApplicationErrorEnum.INVALID_BASE64, e.getMessage());
         } catch (JsonParsingException e) {
@@ -101,21 +102,21 @@ public class DiffService {
 
         JsonPatch diff = Json.createDiff(source, target);
 
-        return new JsonDiff(diff.toJsonArray().size() > 0, diff);
+        return new JsonDiff(diff.toJsonArray().size() == 0, diff);
     }
 
     private StringDiff stringDiff(String a, String b) {
-        boolean different = false;
+        boolean equal = true;
         int initialIndex = -1, finalIndex = -1;
         List<StringDifference> differenceList = new ArrayList<>();
 
         if (a.length() != b.length()) {
-            return new StringDiff(true, differenceList);
+            return new StringDiff(false, differenceList);
         }
 
         for (int i = 0; i < a.length(); i++) {
             if (a.charAt(i) != b.charAt(i)) {
-                different = true;
+                equal = false;
                 if (initialIndex == -1) initialIndex = i;
                 finalIndex = i;
             } else {
@@ -133,6 +134,6 @@ public class DiffService {
             differenceList.add(new StringDifference(initialIndex, finalIndex - initialIndex + 1));
         }*/
 
-        return new StringDiff(different, differenceList);
+        return new StringDiff(equal, differenceList);
     }
 }

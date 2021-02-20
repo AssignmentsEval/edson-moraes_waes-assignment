@@ -6,8 +6,8 @@ import lombok.Getter;
 public enum ApplicationErrorEnum {
 
     // Generic Application errors
-    UNEXPECTED_ERROR("DFE-001", "Ops, an unxepected error ocurred!", 500,
-            "Sorry an unexpected error ocurred. We are doing our bet to fix it "),
+    UNEXPECTED_ERROR("DFE-001", "An unxepected error ocurred!", 500,
+            "An unxepected error ocurred! Cause: {0}"),
 
 
     // Input related errors

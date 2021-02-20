@@ -9,11 +9,11 @@ import java.util.List;
 
 @Getter
 public class JsonDiff {
-    private final boolean different;
+    private final boolean equal;
     private final List<JsonDifference> jsonDifferences;
 
-    public JsonDiff(boolean different, JsonPatch jsonPatch) {
-        this.different = different;
+    public JsonDiff(boolean equal, JsonPatch jsonPatch) {
+        this.equal = equal;
         this.jsonDifferences = new ArrayList<>();
 
         for (JsonValue obj : jsonPatch.toJsonArray()) {

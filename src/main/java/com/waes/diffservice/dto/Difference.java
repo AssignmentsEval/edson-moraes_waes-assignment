@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class Difference {
-    private final Long diffID;
+    private final Long diffId;
     private final StringDiff stringDiff;
     private final JsonDiff jsonDiff;
 }

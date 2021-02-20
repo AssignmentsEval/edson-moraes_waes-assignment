@@ -8,6 +8,6 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 public class StringDiff {
-    boolean different;
+    boolean equal;
     List<StringDifference> stringDifferences;
 }

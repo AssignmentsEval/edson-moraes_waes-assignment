@@ -150,12 +150,12 @@ class DiffServiceTest {
     void returnsEqualWhenDiffIdDoesNotExist() {
         Difference diff = diffService.diff(INVALID_DIFF_ID);
 
-        assertEquals(INVALID_DIFF_ID, diff.getDiffID());
+        assertEquals(INVALID_DIFF_ID, diff.getDiffId());
 
         assertNotNull(diff.getJsonDiff());
         assertNotNull(diff.getStringDiff());
-        assertFalse(diff.getStringDiff().isDifferent());
-        assertFalse(diff.getJsonDiff().isDifferent());
+        assertTrue(diff.getStringDiff().isEqual());
+        assertTrue(diff.getJsonDiff().isEqual());
         assertTrue(diff.getStringDiff().getStringDifferences().isEmpty());
         assertTrue(diff.getJsonDiff().getJsonDifferences().isEmpty());
     }
@@ -166,12 +166,12 @@ class DiffServiceTest {
 
         Difference diff = diffService.diff(DIFF_ID);
 
-        assertEquals(DIFF_ID, diff.getDiffID());
+        assertEquals(DIFF_ID, diff.getDiffId());
 
         assertNotNull(diff.getJsonDiff());
         assertNotNull(diff.getStringDiff());
-        assertTrue(diff.getStringDiff().isDifferent());
-        assertTrue(diff.getJsonDiff().isDifferent());
+        assertFalse(diff.getStringDiff().isEqual());
+        assertFalse(diff.getJsonDiff().isEqual());
         assertTrue(diff.getStringDiff().getStringDifferences().isEmpty());
         assertFalse(diff.getJsonDiff().getJsonDifferences().isEmpty());
     }
@@ -182,12 +182,12 @@ class DiffServiceTest {
 
         Difference diff = diffService.diff(DIFF_ID);
 
-        assertEquals(DIFF_ID, diff.getDiffID());
+        assertEquals(DIFF_ID, diff.getDiffId());
 
         assertNotNull(diff.getJsonDiff());
         assertNotNull(diff.getStringDiff());
-        assertTrue(diff.getStringDiff().isDifferent());
-        assertTrue(diff.getJsonDiff().isDifferent());
+        assertFalse(diff.getStringDiff().isEqual());
+        assertFalse(diff.getJsonDiff().isEqual());
         assertTrue(diff.getStringDiff().getStringDifferences().isEmpty());
         assertFalse(diff.getJsonDiff().getJsonDifferences().isEmpty());
     }
@@ -198,12 +198,12 @@ class DiffServiceTest {
 
         Difference diff = diffService.diff(DIFF_ID);
 
-        assertEquals(DIFF_ID, diff.getDiffID());
+        assertEquals(DIFF_ID, diff.getDiffId());
 
         assertNotNull(diff.getJsonDiff());
         assertNotNull(diff.getStringDiff());
-        assertFalse(diff.getStringDiff().isDifferent());
-        assertFalse(diff.getJsonDiff().isDifferent());
+        assertTrue(diff.getStringDiff().isEqual());
+        assertTrue(diff.getJsonDiff().isEqual());
         assertTrue(diff.getStringDiff().getStringDifferences().isEmpty());
         assertTrue(diff.getJsonDiff().getJsonDifferences().isEmpty());
     }
@@ -214,12 +214,12 @@ class DiffServiceTest {
 
         Difference diff = diffService.diff(DIFF_ID);
 
-        assertEquals(DIFF_ID, diff.getDiffID());
+        assertEquals(DIFF_ID, diff.getDiffId());
 
         assertNotNull(diff.getJsonDiff());
         assertNotNull(diff.getStringDiff());
-        assertTrue(diff.getStringDiff().isDifferent());
-        assertTrue(diff.getJsonDiff().isDifferent());
+        assertFalse(diff.getStringDiff().isEqual());
+        assertFalse(diff.getJsonDiff().isEqual());
         assertTrue(diff.getStringDiff().getStringDifferences().isEmpty());
         assertFalse(diff.getJsonDiff().getJsonDifferences().isEmpty());
         assertEquals(2, diff.getJsonDiff().getJsonDifferences().size());
@@ -241,12 +241,12 @@ class DiffServiceTest {
 
         Difference diff = diffService.diff(DIFF_ID);
 
-        assertEquals(DIFF_ID, diff.getDiffID());
+        assertEquals(DIFF_ID, diff.getDiffId());
 
         assertNotNull(diff.getJsonDiff());
         assertNotNull(diff.getStringDiff());
-        assertTrue(diff.getStringDiff().isDifferent());
-        assertTrue(diff.getJsonDiff().isDifferent());
+        assertFalse(diff.getStringDiff().isEqual());
+        assertFalse(diff.getJsonDiff().isEqual());
         assertFalse(diff.getStringDiff().getStringDifferences().isEmpty());
         assertFalse(diff.getStringDiff().getStringDifferences().isEmpty());
         assertEquals(2, diff.getStringDiff().getStringDifferences().size());
@@ -258,16 +258,16 @@ class DiffServiceTest {
     }
 
     @Test
-    void returnsNotJSONEqualButNotStringEqual() {
+    void returnsJSONEqualButNotStringEqual() {
         when(diffRepository.findById(DIFF_ID)).thenReturn(Optional.of(DIFF_DATA_ONLY_JSON_EQUAL));
 
         Difference diff = diffService.diff(DIFF_ID);
 
-        assertEquals(DIFF_ID, diff.getDiffID());
+        assertEquals(DIFF_ID, diff.getDiffId());
         assertNotNull(diff.getJsonDiff());
         assertNotNull(diff.getStringDiff());
-        assertTrue(diff.getStringDiff().isDifferent());
-        assertFalse(diff.getJsonDiff().isDifferent());
+        assertFalse(diff.getStringDiff().isEqual());
+        assertTrue(diff.getJsonDiff().isEqual());
         assertTrue(diff.getStringDiff().getStringDifferences().isEmpty());
         assertTrue(diff.getJsonDiff().getJsonDifferences().isEmpty());
     }

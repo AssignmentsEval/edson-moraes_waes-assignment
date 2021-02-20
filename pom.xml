@@ -13,7 +13,7 @@
     <name>diff-service</name>
     <description>Demo project for Spring Boot</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>8</java.version>
         <pitest.version>1.6.3</pitest.version>
     </properties>
     <dependencyManagement>
@@ -103,6 +103,14 @@
 
 
     <build>
+        <testResources>
+            <testResource>
+                <directory>src/test/java</directory>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </testResource>
+        </testResources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -124,11 +132,12 @@
                     <targetClasses>
                         <param>com.waes.diffservice.*</param>
                     </targetClasses>
-                    <excludedClasses>
+                    <excludedTestClasses>
                         <excludedClass>com.waes.diffservice.DiffServiceApplicationTests</excludedClass>
                         <excludedClass>com.waes.diffservice.configuration.*</excludedClass>
                         <excludedClass>com.waes.diffservice.controllers.*</excludedClass>
-                    </excludedClasses>
+                        <excludedClass>karate.**.*</excludedClass>
+                    </excludedTestClasses>
                 </configuration>
             </plugin>
             <plugin>
