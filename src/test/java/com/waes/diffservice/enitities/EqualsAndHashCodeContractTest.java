@@ -3,7 +3,7 @@ package com.waes.diffservice.enitities;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 
-class EqualsAndHashCodeContract {
+class EqualsAndHashCodeContractTest {
 
     @Test
     public void diffData() {
