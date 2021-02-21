@@ -46,13 +46,10 @@ class DiffServiceTest {
     private static final String JSON_1_WITH_TYPO = "{\"name\":\"Ebony\",\"species\":\"Diospyros ebanun\"}";
     private static final String JSON_2 = "{\"name\":\"Oak\",\"species\":\"Quercus robur\"}";
     private static final String JSON_3 = "{\"name\":\"Pau-brasil\",\"species\":\"Paubrasilia echinata\"}";
-    private static final String JSON_3_WITH_WHITESPACE = "{\"name\" : \"Pau-brasil\",\"species\" : \"Paubrasilia echinata\"}";
-
 
     private DiffData DIFF_DATA_NOT_EQUAL;
     private DiffData DIFF_DATA_NOT_EQUAL_WITH_TYPO;
     private DiffData DIFF_DATA_EQUAL;
-    private DiffData DIFF_DATA_ONLY_JSON_EQUAL;
     private DiffData DIFF_DATA_LEFT_ONLY;
     private DiffData DIFF_DATA_RIGHT_ONLY;
 
@@ -73,7 +70,6 @@ class DiffServiceTest {
         DIFF_DATA_NOT_EQUAL = DiffData.builder().id(DIFF_ID).leftJson(JSON_1).rightJson(JSON_2).build();
         DIFF_DATA_NOT_EQUAL_WITH_TYPO = DiffData.builder().id(DIFF_ID).leftJson(JSON_1).rightJson(JSON_1_WITH_TYPO).build();
         DIFF_DATA_EQUAL = DiffData.builder().id(DIFF_ID).leftJson(JSON_3).rightJson(JSON_3).build();
-        DIFF_DATA_ONLY_JSON_EQUAL = DiffData.builder().id(DIFF_ID).leftJson(JSON_3).rightJson(JSON_3_WITH_WHITESPACE).build();
         DIFF_DATA_LEFT_ONLY = DiffData.builder().id(DIFF_ID).leftJson(JSON_1).build();
         DIFF_DATA_RIGHT_ONLY = DiffData.builder().id(DIFF_ID).rightJson(JSON_1).build();
     }

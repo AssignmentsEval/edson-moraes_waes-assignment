@@ -128,6 +128,11 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
+                <configuration>
+                    <excludes>
+                        <exclude>karate/**/*.java</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.pitest</groupId>
@@ -144,15 +149,14 @@
                     <targetClasses>
                         <param>com.waes.diffservice.*</param>
                     </targetClasses>
-                    <excludedTestClasses>
-                        <excludedClass>com.waes.diffservice.DiffServiceApplicationTests</excludedClass>
-                        <excludedClass>com.waes.diffservice.configuration.SwaggerConfiguration</excludedClass>
-                        <excludedClass>com.waes.diffservice.configuration.BeanConfiguration</excludedClass>
-                        <excludedClass>com.waes.diffservice.configuration.DataSourceConfiguration</excludedClass>
-                        <excludedClass>com.waes.diffservice.advice.RestResponseEntityExceptionHandler</excludedClass>
-                        <excludedClass>com.waes.diffservice.controllers.DiffController</excludedClass>
-                        <excludedClass>karate.**.*</excludedClass>
-                    </excludedTestClasses>
+                    <targetTests>
+                        <param>com.waes.diffservice.*</param>
+                    </targetTests>
+                    <excludedClasses>
+                        <param>com.waes.diffservice.advice.*</param>
+                        <param>com.waes.diffservice.configuration.*</param>
+                        <param>com.waes.diffservice.controllers.*</param>
+                    </excludedClasses>
                 </configuration>
             </plugin>
             <plugin>
