@@ -49,6 +49,17 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-sleuth</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>3.0.0</version>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -59,6 +70,7 @@
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
+
         <dependency>
             <groupId>javax.json</groupId>
             <artifactId>javax.json-api</artifactId>
@@ -134,8 +146,11 @@
                     </targetClasses>
                     <excludedTestClasses>
                         <excludedClass>com.waes.diffservice.DiffServiceApplicationTests</excludedClass>
-                        <excludedClass>com.waes.diffservice.configuration.*</excludedClass>
-                        <excludedClass>com.waes.diffservice.controllers.*</excludedClass>
+                        <excludedClass>com.waes.diffservice.configuration.SwaggerConfiguration</excludedClass>
+                        <excludedClass>com.waes.diffservice.configuration.BeanConfiguration</excludedClass>
+                        <excludedClass>com.waes.diffservice.configuration.DataSourceConfiguration</excludedClass>
+                        <excludedClass>com.waes.diffservice.advice.RestResponseEntityExceptionHandler</excludedClass>
+                        <excludedClass>com.waes.diffservice.controllers.DiffController</excludedClass>
                         <excludedClass>karate.**.*</excludedClass>
                     </excludedTestClasses>
                 </configuration>
