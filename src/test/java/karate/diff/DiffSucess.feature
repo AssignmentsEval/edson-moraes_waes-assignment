@@ -22,10 +22,10 @@ Feature: Diff Success Secanrios
     And assert response.jsonDiff.jsonDifferences.length == <jsonDifferences>
 
     Examples:
-      | diffId | textLeft       | textRight              | textEqual | jsonEqual | stringDifferences | jsonDifferences | name       |
-      | 1      | 'eyJhIjoiYiJ9' | 'eyJhIjoiYiJ9'         | true      | true      | 0                 | 0               | Equal      |
-      | 2      | 'eyJhIjoieiJ9' | 'eyJhIjoiYiJ9'         | false     | false     | 1                 | 1               | Not Equal  |
-      | 3      | 'eyJhIjoiYiJ9' | 'eyAiYSIgOiAiYiIgfQ==' | false     | true      | 0                 | 0               | Json Equal |
+      | diffId | textLeft       | textRight              | textEqual | jsonEqual | stringDifferences | jsonDifferences | name                               |
+      | 1      | 'eyJhIjoiYiJ9' | 'eyJhIjoiYiJ9'         | true      | true      | 0                 | 0               | Equal                              |
+      | 2      | 'eyJhIjoieiJ9' | 'eyJhIjoiYiJ9'         | false     | false     | 1                 | 1               | Not Equal                          |
+      | 3      | 'eyJhIjoiYiJ9' | 'eyAiYSIgOiAiYiIgfQ==' | true      | true      | 0                 | 0               | Equal, Right Input With WhiteSpace |
 
 #  'eyJhIjoiYiJ9' -> {"a":"b"}
 #  'eyJhIjoieiJ9' -> {"a":"z"}

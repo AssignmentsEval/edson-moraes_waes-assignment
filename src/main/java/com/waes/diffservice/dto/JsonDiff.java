@@ -18,7 +18,6 @@ public class JsonDiff {
 
         for (JsonValue obj : jsonPatch.toJsonArray()) {
             jsonDifferences.add(new JsonDifference(
-
                     obj.asJsonObject().getString("op"),
                     obj.asJsonObject().getString("path"),
                     obj.asJsonObject().getString("value",null))

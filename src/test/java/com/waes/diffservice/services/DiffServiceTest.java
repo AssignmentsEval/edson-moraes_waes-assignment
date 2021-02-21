@@ -5,7 +5,7 @@ import com.waes.diffservice.ApplicationErrorEnum;
 import com.waes.diffservice.dto.Difference;
 import com.waes.diffservice.dto.JsonDifference;
 import com.waes.diffservice.enitities.DiffData;
-import com.waes.diffservice.exception.InvalidInputException;
+import com.waes.diffservice.exception.InputException;
 import com.waes.diffservice.repositories.DiffRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -257,21 +257,6 @@ class DiffServiceTest {
         assertFalse(diff.getJsonDiff().getJsonDifferences().isEmpty());
     }
 
-    @Test
-    void returnsJSONEqualButNotStringEqual() {
-        when(diffRepository.findById(DIFF_ID)).thenReturn(Optional.of(DIFF_DATA_ONLY_JSON_EQUAL));
-
-        Difference diff = diffService.diff(DIFF_ID);
-
-        assertEquals(DIFF_ID, diff.getDiffId());
-        assertNotNull(diff.getJsonDiff());
-        assertNotNull(diff.getStringDiff());
-        assertFalse(diff.getStringDiff().isEqual());
-        assertTrue(diff.getJsonDiff().isEqual());
-        assertTrue(diff.getStringDiff().getStringDifferences().isEmpty());
-        assertTrue(diff.getJsonDiff().getJsonDifferences().isEmpty());
-    }
-
     private DiffData deepCopyDiffData(DiffData diffData) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(objectMapper.writeValueAsBytes(diffData), DiffData.class);
@@ -279,10 +264,10 @@ class DiffServiceTest {
 
     @Test
     void throwsInvalidInputExceptionWhenBase64isInvalid() {
-        InvalidInputException invalidInputException;
+        InputException invalidInputException;
         when(decoder.decode(anyString())).thenThrow(new IllegalArgumentException(CAUSE_STRING));
 
-        invalidInputException = assertThrows(InvalidInputException.class,
+        invalidInputException = assertThrows(InputException.class,
                 () -> diffService.saveLeftJson(DIFF_ID, JSON_1));
         assertEquals(invalidInputException.getType(), ApplicationErrorEnum.INVALID_BASE64.getType());
         assertEquals(invalidInputException.getTitle(), ApplicationErrorEnum.INVALID_BASE64.getTitle());
@@ -293,10 +278,10 @@ class DiffServiceTest {
 
     @Test
     void throwsInvalidInputExceptionWhenJsonisInvalid() {
-        InvalidInputException invalidInputException;
+        InputException invalidInputException;
         when(decoder.decode(anyString())).thenReturn(INVALID_JSON.getBytes(StandardCharsets.UTF_8));
 
-        invalidInputException = assertThrows(InvalidInputException.class,
+        invalidInputException = assertThrows(InputException.class,
                 () -> diffService.saveLeftJson(DIFF_ID, INVALID_JSON));
         assertEquals(invalidInputException.getType(), ApplicationErrorEnum.INVALID_JSON.getType());
         assertEquals(invalidInputException.getTitle(), ApplicationErrorEnum.INVALID_JSON.getTitle());

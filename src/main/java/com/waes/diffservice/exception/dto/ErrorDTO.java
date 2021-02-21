@@ -1,4 +1,4 @@
-package com.waes.diffservice.dto;
+package com.waes.diffservice.exception.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
